@@ -20,9 +20,6 @@
       fare_Range_Order = ["0 < 30","30 < 60","60 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540"]
       age_Range_Order = ["0 < 10","10 < 20","20 < 30","30 < 40","40 < 50","50 < 60","60 < 70","70 < 80","80 < 90","Unknown"]
       overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown"]
-		
-
-
  		</script>
  		<style>
  			body {
@@ -47,127 +44,154 @@
  			#main-body {
  				background: #FFFFFF;
  			}
-
  		</style>
  	</head>
  	<body>
  		<div class="container">
  			<div class="row title-banner">
  				<div class="col-md-6">
- 					<img class="title-logo" src="./img/100x100">
+ 					<img class="title-logo" src="./img/Titanic-96.png">
+          <!--Found at https://icons8.com/icon/42114/titanic-->
  				</div>
  				<div class="col-md-6 title-text text-right">
  					<h1>Joseph Jasper</h1>
- 					<h3>Testing d3.js in an actual webpage format.</h3>
+ 					<h3>
+            Udacity Data Visualization Project
+          </h3>
  				</div>
  			</div>
  			<div class="row" id="main-body">
+        <div class="row">
+          <h3 style="color:#00ade6; text-align:center;">Titanic Passenger Data Exploration</h3>
+        </div>
  				<div class="col-md-2" id="buttons">
- 					<span id="buttons_text"></span>
+ 					<span id="buttons_text" style="display: none;"></span>
  					<br>
- 					<h4>Measures and Groups</h4>
- 					<form align="left" name="measures" id="form_change">
- 						Measure
-            <select name="measure_select" onchange="measure = this.value">
-  						<option value="surv_Rate">Surv. Rate</option>
-    					<option value="surv_Count">Surv. Count</option>
-    					<option value="pop_Count">Pop. Count</option>
- 						</select>
- 						<br>
- 						X Axis
-  					<select name="x-axis" onchange = "x_Axis = this.value">
-    					<option value="Gender">Gender</option>
-              <option value="Class">Class</option>
-    					<option value="Age Range">Age</option>
-    					<option value="Fare Range">Fare</option>
-    					<option value="Port">Port</option>
-              <option value="Mortality">Mortality</option>
-  					</select>
-  					<br>
-  					Grouping
-  					<select name="Grouping" onchange = "grouping = this.value">
-    					<option value="None">---</option>
-              <option value="Gender">Gender</option>
-              <option value="Class">Class</option>
-              <option value="Age Range">Age</option>
-              <option value="Fare Range">Fare</option>
-              <option value="Port">Port</option>
-              <option value="Mortality">Mortality</option>
-  					</select>
+ 					<form align="center" name="measures" id="form_change">
+              <!-- Maybe look at changing to bootstrap dropdowns.  http://getbootstrap.com/components/#dropdowns -->
+   					<div class="row">
+              <h4>Chart Controls</h4>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+                Measure
+                <br>
+                <select name="measure_select" onchange="measure = this.value" >
+      						<option value="surv_Rate" style="text-align: center;">Survival Rate</option>
+        					<option value="surv_Count" >Survivor Count</option>
+        					<option value="pop_Count" >Population Count</option>
+     						</select>
+     						<br>
+              </div>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+     						X Axis
+                <br>
+      					<select name="x-axis" onchange = "x_Axis = this.value">
+        					<option value="Gender">Gender</option>
+                  <option value="Class">Class</option>
+        					<option value="Age Range">Age</option>
+        					<option value="Fare Range">Fare</option>
+        					<option value="Port">Port</option>
+                  <option value="Mortality">Mortality</option>
+      					</select>
+              </div>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+      					Grouping
+                <br>
+      					<select name="Grouping" onchange = "grouping = this.value">
+        					<option value="None">---</option>
+                  <option value="Gender">Gender</option>
+                  <option value="Class">Class</option>
+                  <option value="Age Range">Age</option>
+                  <option value="Fare Range">Fare</option>
+                  <option value="Port">Port</option>
+                  <option value="Mortality">Mortality</option>
+      					</select>
+              </div>
+            </div>
   					<hr>
-  					<h4 align="center">Filter</h4>
-            Gender
-            <select name="Gender Slice" onchange = "gender_Slice = this.value">
-              <option value="None">---</option>
-              <option value="Female">Female</option>
-              <option value="Male">Male</option>
-            </select>
+            <div class="row">
+              <h4 align="center">Filters</h4>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+                Gender
+                <br>
+                <select name="Gender Slice" onchange = "gender_Slice = this.value">
+                  <option value="None">---</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+                <br>
+                Class
+                <br>
+                <select name="Class Slice" onchange = "class_Slice = this.value">
+                  <option value="None">---</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <br>
+                Port
+                <br>
+                <select name="Port Slice" onchange = "port_Slice = this.value">
+                  <option value="None">---</option>
+                  <option value="Cherbourg">Cherbourg</option>
+                  <option value="Southampton">Southampton</option>
+                  <option value="Queenstown">Queenstown</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+                <br>
+              </div>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+                Age Range
+                <br>
+                <select id="age" name="Age Range Slice" onchange = "ageRangeUpdate()" multiple>
+                  <option value="None">---</option>
+                  <option value="0 < 10">0 &lt; 10</option>
+                  <option value="10 < 20">10 &lt; 20</option>
+                  <option value="20 < 30">20 &lt; 30</option>
+                  <option value="30 < 40">30 &lt; 40</option>
+                  <option value="40 < 50">40 &lt; 50</option>
+                  <option value="50 < 60">50 &lt; 60</option>
+                  <option value="60 < 70">60 &lt; 70</option>
+                  <option value="70 < 80">70 &lt; 80</option>
+                  <option value="80 < 90">80 &lt; 90</option>
+                  <option value="Unknown">Unknown</option>
+                </select>
+                <br>
+              </div>
+              <div class="col-md-12 col-sm-4 col-xs-4">
+                Fare Range
+                <br>
+                <select id="fare" name="Fare Range Slice" onchange = "fareRangeUpdate()" multiple>
+                  <option value="None">---</option>
+                  <option value="0 < 30">0 &lt; 30</option>
+                  <option value="30 < 60">30 &lt; 60</option>
+                  <option value="60 < 90">60 &lt; 90</option>
+                  <option value="90 < 120">90 &lt; 120</option>
+                  <option value="120 < 150">120 &lt; 150</option>
+                  <option value="150 < 180">150 &lt; 180</option>
+                  <option value="210 < 240">210 &lt; 240</option>
+                  <option value="240 < 270">240 &lt; 270</option>
+                  <option value="510 < 540">510 &lt; 540</option>
+                </select>
+                <br>
+              </div>
+            </div>
             <br>
-            Class
-            <select name="Class Slice" onchange = "class_Slice = this.value">
-              <option value="None">---</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            <br>
-            Age Range
-            <br>
-            <select id="age" name="Age Range Slice" onchange = "ageRangeUpdate()" multiple>
-              <option value="None">---</option>
-              <option value="0 < 10">0 &lt; 10</option>
-              <option value="10 < 20">10 &lt; 20</option>
-              <option value="20 < 30">20 &lt; 30</option>
-              <option value="30 < 40">30 &lt; 40</option>
-              <option value="40 < 50">40 &lt; 50</option>
-              <option value="50 < 60">50 &lt; 60</option>
-              <option value="60 < 70">60 &lt; 70</option>
-              <option value="70 < 80">70 &lt; 80</option>
-              <option value="80 < 90">80 &lt; 90</option>
-              <option value="Unknown">Unknown</option>
-            </select>
-
-            <br>
-            Fare Range
-            <br>
-            <select id="fare" name="Fare Range Slice" onchange = "fareRangeUpdate()" multiple>
-              <option value="None">---</option>
-              <option value="0 < 30">0 &lt; 30</option>
-              <option value="30 < 60">30 &lt; 60</option>
-              <option value="60 < 90">60 &lt; 90</option>
-              <option value="90 < 120">90 &lt; 120</option>
-              <option value="120 < 150">120 &lt; 150</option>
-              <option value="150 < 180">150 &lt; 180</option>
-              <option value="210 < 240">210 &lt; 240</option>
-              <option value="240 < 270">240 &lt; 270</option>
-              <option value="510 < 540">510 &lt; 540</option>
-            </select>
-            <br>
-            Port
-            <select name="Port Slice" onchange = "port_Slice = this.value">
-              <option value="None">---</option>
-              <option value="Cherbourg">Cherbourg</option>
-              <option value="Southampton">Southampton</option>
-              <option value="Queenstown">Queenstown</option>
-              <option value="Unknown">Unknown</option>
-            </select>
 					</form>
+          <br>
  				</div>
  				<div class="col-md-8" id="chart">
- 					<span id="chart_text"></span>
+ 					<span id="chart_text" style="display: none;"></span>
  					<div class="col-md-12" id="chartContainer">
  						<script src="http://d3js.org/d3.v4.min.js"></script>
  						<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
   						<script type="text/javascript">
                 var svg = dimple.newSvg("#chartContainer", 590, 400);
                 function chart_graph() {
-                  
                   d3.select("svg")
                     .selectAll("*")
                     .remove();
                   var chartGrouping = null
                   d3.csv("titanic_data_post.csv",
-
                     function (data) {
                       filteredData = data.filter(function(d) {
                         return (class_Slice == "None" || class_Slice == d['Class'])
@@ -185,6 +209,7 @@
                         chartGrouping = grouping
                         x = myChart.addCategoryAxis("x", [x_Axis, grouping]);
                         x.addOrderRule(overall_Order);
+                        x.addGroupOrderRule(overall_Order);
                       }
                       var y = myChart.addMeasureAxis("y", "Survived");
 
@@ -195,7 +220,7 @@
                       } else if (measure == "pop_Count") {
                         bars.aggregate = dimple.aggregateMethod.count;
                       }
-                      myChart.addLegend(65, 10, 510, 20, "right");
+                      myChart.addLegend(65, 10, 510, 20, "left");
                       myChart.draw();
                       if (x_Axis == grouping || grouping == "None"){
                         d3.select("svg")
@@ -217,7 +242,7 @@
 					</div>
  				</div>
  				<div class="col-md-2" id="end_margin">
- 					<span id="end_margin_text"></span>
+ 					<span id="end_margin_text" style="display: none;"></span>
  				</div> 				
  			</div>
  		</div>
