@@ -9,6 +9,7 @@
    		<script src="http://d3js.org/d3.v4.min.js"></script>
    		<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
  		<script type-"text/javascript">
+      /* Define initial state of variables for chart function*/
       measure = "surv_Rate"
       x_Axis = "Gender"
       grouping = "None"
@@ -193,6 +194,7 @@
                   var chartGrouping = null
                   d3.csv("./data/titanic_data_post.csv",
                     function (data) {
+                      /* Filter data based on slicer variables */
                       filteredData = data.filter(function(d) {
                         return (class_Slice == "None" || class_Slice == d['Class'])
                         && (gender_Slice == "None" || gender_Slice == d['Gender'])
@@ -200,8 +202,11 @@
                         && ((fareRange_Slice[0] == "None" && fareRange_Slice.length == 1)|| fareRange_Slice.indexOf(d['Fare Range']) !== -1)
                         && (port_Slice == "None" || port_Slice == d['Port']);
                       });
+
                       var myChart = new dimple.chart(svg, filteredData);
                       myChart.setBounds(60, 40, 510, 320)
+
+                      /* Create functionality in case user wants to compare 2 features or just view one */
                       if (x_Axis == grouping || grouping == "None"){
                         x = myChart.addCategoryAxis("x", x_Axis);
                         x.addOrderRule(overall_Order);
@@ -211,7 +216,11 @@
                         x.addOrderRule(overall_Order);
                         x.addGroupOrderRule(overall_Order);
                       }
+
+
                       var y = myChart.addMeasureAxis("y", "Survived");
+
+                      /* Title and formatting control for y axis */
                       if (measure == "surv_Count") {
                         y.title = "Survivor Count";
                       } else if (measure == "surv_Rate") {
@@ -224,6 +233,8 @@
 
                       var bars = myChart.addSeries(chartGrouping, dimple.plot.bar);
                       bars.addOrderRule(overall_Order);
+
+                      /* Measure control based on selection */
                       if (measure == "surv_Rate") {
                         bars.aggregate = dimple.aggregateMethod.avg;
                       } else if (measure == "pop_Count") {
@@ -231,6 +242,8 @@
                       }
                       myChart.addLegend(65, 10, 510, 20, "left");
                       myChart.draw();
+
+                      /* Evaluate need for a legend */
                       if (x_Axis == grouping || grouping == "None"){
                         d3.select("svg")
                           .selectAll(".dimple-legend")
@@ -238,9 +251,11 @@
                       }
                     }
                   );
+
+                  /* Allow graph to change size and preserve aspect ratio depending on resizing */
                   d3.select('svg')
                     .attr('preserveAspectRatio','xMinYMin meet')
-                    .attr('viewBox', '0 0 590 400')
+                    .attr('viewBox', '0 0 590 450')
                     .classed('svg-content-responsive', true)
                     .attr('height', null)
                     .attr('width', null);
@@ -256,6 +271,7 @@
  			</div>
  		</div>
  		<script type="text/javascript">
+      /* Functions to get sizes of the main columns of the body, usefule when first evaluating layout */
  			button_width = document.getElementById('buttons').offsetWidth;
  			document.getElementById("buttons_text").innerHTML = button_width;
  			chart_width = document.getElementById('chart').offsetWidth;
@@ -273,10 +289,14 @@
 				margin_width = document.getElementById("end_margin").offsetWidth;
 				document.getElementById("end_margin_text").innerHTML = margin_width;
  			});
+
+      /* Listener for form to redraw the chart when a change is made */
       document.getElementById("form_change").addEventListener("change",
         function(event) {
             chart_graph();
         }, false);
+
+      /* Function to collect all options selected from the Fare Range slicer */
       function fareRangeUpdate() {
         fareRange_Slice = []
         fareArray = d3.select('#fare')['_groups'][0][0]['selectedOptions'];
@@ -285,6 +305,8 @@
           fareRange_Slice.push(fareArray[i]['value']);
         }
       }
+
+      /* Function to collect all options selected from the Age Range slicer */
       function ageRangeUpdate() {
         ageRange_Slice = []
         ageArray = d3.select('#age')['_groups'][0][0]['selectedOptions'];
