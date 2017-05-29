@@ -185,7 +185,7 @@
  						<script src="http://d3js.org/d3.v4.min.js"></script>
  						<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
   						<script type="text/javascript">
-                var svg = dimple.newSvg("#chartContainer", 590, 400);
+                var svg = dimple.newSvg("#chartContainer", 590, 450);
                 function chart_graph() {
                   d3.select("svg")
                     .selectAll("*")
@@ -201,7 +201,7 @@
                         && (port_Slice == "None" || port_Slice == d['Port']);
                       });
                       var myChart = new dimple.chart(svg, filteredData);
-                      myChart.setBounds(60, 30, 510, 330)
+                      myChart.setBounds(60, 40, 510, 320)
                       if (x_Axis == grouping || grouping == "None"){
                         x = myChart.addCategoryAxis("x", x_Axis);
                         x.addOrderRule(overall_Order);
@@ -212,6 +212,15 @@
                         x.addGroupOrderRule(overall_Order);
                       }
                       var y = myChart.addMeasureAxis("y", "Survived");
+                      if (measure == "surv_Count") {
+                        y.title = "Survivor Count";
+                      } else if (measure == "surv_Rate") {
+                        y.overrideMax = 1.0;
+                        y.tickFormat = d3.format(".0%");
+                        y.title = "Survival Rate";
+                      } else if (measure == "pop_Count") {
+                        y.title = "Population Count";
+                      }
 
                       var bars = myChart.addSeries(chartGrouping, dimple.plot.bar);
                       bars.addOrderRule(overall_Order);
