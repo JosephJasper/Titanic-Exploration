@@ -191,7 +191,7 @@
                     .selectAll("*")
                     .remove();
                   var chartGrouping = null
-                  d3.csv("titanic_data_post.csv",
+                  d3.csv("./data/titanic_data_post.csv",
                     function (data) {
                       filteredData = data.filter(function(d) {
                         return (class_Slice == "None" || class_Slice == d['Class'])
