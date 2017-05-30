@@ -13,7 +13,7 @@
       var measure = "pop_Count";
       var measure2 = "surv_Rate";
       var x_Axis = "Gender";
-      var grouping = "None";
+      var grouping = "Class";
       var class_Slice = "None";
       var gender_Slice = "None";
       var mortality_Slice = "None";
@@ -57,14 +57,14 @@
  	<body>
  		<div class="container">
  			<div class="row title-banner">
- 				<div class="col-md-6">
+ 				<div class="col-md-6 col-sm-6 col-xs-6">
  					<img class="title-logo" src="./img/Titanic-96.png">
           <!--Found at https://icons8.com/icon/42114/titanic-->
  				</div>
- 				<div class="col-md-6 title-text text-right">
+ 				<div class="col-md-6 col-sm-6 col-xs-6 title-text text-right">
  					<h1>Joseph Jasper</h1>
  					<h3>
-            Udacity Data Visualization Project
+            Udacity Visualization Project
           </h3>
  				</div>
  			</div>
@@ -118,7 +118,7 @@
       					<select name="Grouping" onchange = "grouping = this.value">
         					<option value="None">---</option>
                   <option value="Gender">Gender</option>
-                  <option value="Class">Class</option>
+                  <option value="Class" selected="selected">Class</option>
                   <option value="Age Range">Age</option>
                   <option value="Fare Range">Fare</option>
                   <option value="Port">Port</option>
@@ -170,7 +170,7 @@
                 Age Range
                 <br>
                 <select id="age" name="Age Range Slice" onchange = "ageRangeUpdate()" multiple>
-                  <option value="None">---</option>
+                  <option value="None" selected="selected">---</option>
                   <option value="0 < 10">0 &lt; 10</option>
                   <option value="10 < 20">10 &lt; 20</option>
                   <option value="20 < 30">20 &lt; 30</option>
@@ -188,7 +188,7 @@
                 Fare Range
                 <br>
                 <select id="fare" name="Fare Range Slice" onchange = "fareRangeUpdate()" multiple>
-                  <option value="None">---</option>
+                  <option value="None" selected="selected">---</option>
                   <option value="0 < 30">0 &lt; 30</option>
                   <option value="30 < 60">30 &lt; 60</option>
                   <option value="60 < 90">60 &lt; 90</option>
