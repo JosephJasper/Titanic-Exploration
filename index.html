@@ -230,6 +230,7 @@
                       filteredData = data.filter(function(d) {
                         return (class_Slice == "None" || class_Slice == d['Class'])
                         && (gender_Slice == "None" || gender_Slice == d['Gender'])
+                        && (mortality_Slice =="None" || mortality_Slice == d['Mortality'])
                         && ((ageRange_Slice[0] == "None" && ageRange_Slice.length == 1)|| ageRange_Slice.indexOf(d['Age Range']) !== -1)
                         && ((fareRange_Slice[0] == "None" && fareRange_Slice.length == 1)|| fareRange_Slice.indexOf(d['Fare Range']) !== -1)
                         && (port_Slice == "None" || port_Slice == d['Port']);
