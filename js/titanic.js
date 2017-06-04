@@ -43,7 +43,7 @@ function chart_graph() {
       var myChart = new dimple.chart(svg, filteredData);
       myChart.setBounds(60, 40, 470, 320)
 
-      /* Using default colors with black stroke to highlight dots over bars */
+      /* Using default colors with black stroke to highlight bubbles over bars */
       myChart.defaultColors = [
         new dimple.color('#93BAD5','#000000',1),
         new dimple.color('#FC998E','#000000',1),
@@ -109,11 +109,11 @@ function chart_graph() {
 
       if (measure !== "none" && measure !== measure2 && measure2 !== "none" && measure.substr(measure.length - 5) !== measure2.substr(measure2.length - 5)) {
         y.title += " (bars)";
-        y2.title += " (dots)";
+        y2.title += " (bubbles)";
       } else if (measure == "surv_Count" && measure !== measure2 && measure2 == "pop_Count") {
-        y.title = "Survivor Count (bars) vs. Population Count (dots)"
+        y.title = "Survivor Count (bars) vs. Population Count (bubbles)"
       } else if (measure == "pop_Count" && measure !== measure2 && measure2 == "surv_Count") {
-        y.title = "Population Count (bars) vs. Survivor Count (dots)"
+        y.title = "Population Count (bars) vs. Survivor Count (bubbles)"
       }
 
 
@@ -137,17 +137,17 @@ function chart_graph() {
       if (measure2 !== "none" && measure2 !== measure) {
         /* Put both measures on the same y axis if they are both counts */
         if (measure.substr(measure.length - 5) !== measure2.substr(measure2.length - 5)) {
-          var dots = myChart.addSeries(chartGrouping, dimple.plot.bubble, [x, y2]);
-          dots.addOrderRule(overall_Order);
+          var bubbles = myChart.addSeries(chartGrouping, dimple.plot.bubble, [x, y2]);
+          bubbles.addOrderRule(overall_Order);
         } else {
-          var dots = myChart.addSeries(chartGrouping, dimple.plot.bubble, [x, y]);
-          dots.addOrderRule(overall_Order);
+          var bubbles = myChart.addSeries(chartGrouping, dimple.plot.bubble, [x, y]);
+          bubbles.addOrderRule(overall_Order);
         }
           /* Measure2 control based on selection */
         if (measure2 == "surv_Rate") {
-          dots.aggregate = dimple.aggregateMethod.avg;
+          bubbles.aggregate = dimple.aggregateMethod.avg;
         } else if (measure2 == "pop_Count") {
-          dots.aggregate = dimple.aggregateMethod.count;
+          bubbles.aggregate = dimple.aggregateMethod.count;
         }
       }
 
