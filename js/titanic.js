@@ -12,7 +12,9 @@ var port_Slice = "None";
 var description_Text = "";
 var fare_Range_Order = ["0 < 30","30 < 60","60 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540"];
 var age_Range_Order = ["0 < 10","10 < 20","20 < 30","30 < 40","40 < 50","50 < 60","60 < 70","70 < 80","80 < 90","Unknown"];
-var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown"];
+var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown", "Perished", "Survived"];
+
+var test;
 
 /* Variables for the animation */
 var initial_State = {};
@@ -41,7 +43,7 @@ function chart_graph() {
       });
 
       var myChart = new dimple.chart(svg, filteredData);
-      myChart.setBounds(60, 40, 470, 320)
+      myChart.setBounds(60, 20, 470, 320)
 
       /* Using default colors with black stroke to highlight bubbles over bars */
       myChart.defaultColors = [
@@ -118,14 +120,10 @@ function chart_graph() {
 
 
 
-
-
-
+      /* Measure control based on selection */
       if (measure !== "none") {
         var bars = myChart.addSeries(chartGrouping, dimple.plot.bar, [x, y]);
         bars.addOrderRule(overall_Order);
-
-        /* Measure control based on selection */
         if (measure == "surv_Rate") {
           bars.aggregate = dimple.aggregateMethod.avg;
         } else if (measure == "pop_Count") {
@@ -134,6 +132,7 @@ function chart_graph() {
         }
       }
 
+      /* Measure2 control based on selection */
       if (measure2 !== "none" && measure2 !== measure) {
         /* Put both measures on the same y axis if they are both counts */
         if (measure.substr(measure.length - 5) !== measure2.substr(measure2.length - 5)) {
@@ -143,7 +142,6 @@ function chart_graph() {
           var bubbles = myChart.addSeries(chartGrouping, dimple.plot.bubble, [x, y]);
           bubbles.addOrderRule(overall_Order);
         }
-          /* Measure2 control based on selection */
         if (measure2 == "surv_Rate") {
           bubbles.aggregate = dimple.aggregateMethod.avg;
         } else if (measure2 == "pop_Count") {
@@ -151,9 +149,54 @@ function chart_graph() {
         }
       }
 
+      /* Change tool tip if measures are pop_Count.  Tooltip defaults to Survived which does not match the count aggregation */
+      if (measure == "pop_Count") {
+        if (grouping == "None") {
+          bars.getTooltipText = function (e) {
+            test = e;
+            return [
+            x_Axis + ":  " + e.x,
+            "Passengers:  " + e.y
+            ];
+          }
+        } else {
+          bars.getTooltipText = function (e) {
+            test = e;
+            return [
+            grouping + ":  " + e.aggField[0],
+            x_Axis + ":  " + e.x,
+            "Passengers:  " + e.y
+            ];
+          }
+        }
+      }
+
+      if (measure !== "pop_Count" && measure2 == "pop_Count") {
+        if (grouping == "None") {
+          bubbles.getTooltipText = function (e) {
+            test = e;
+            return [
+            x_Axis + ":  " + e.x,
+            "Passengers:  " + e.y
+            ];
+          }
+        } else {
+          bubbles.getTooltipText = function (e) {
+            test = e;
+            return [
+            grouping + ":  " + e.aggField[0],
+            x_Axis + ":  " + e.x,
+            "Passengers:  " + e.y
+            ];
+          }
+        }
+      }
+
+
       /* Evaluate need for a legend */
       if (x_Axis !== grouping && grouping !== "None"){
-        myChart.addLegend(65, 10, 510, 20, "left");
+        legend = myChart.addLegend(65, 380, 510, 20, "left");
+        legend.text = "Test";
       }
 
       myChart.draw();
