@@ -87,20 +87,21 @@
                 Bar Measure
                 <br>
                 <select name="measure_select" onchange="measure = this.value" >
-      						<option value="pop_Count" >Population Count</option>
-        					<option value="surv_Count" >Survivor Count</option>
-        					<option value="surv_Rate"  >Survival Rate</option>
                   <option value="none" >---</option>
+                  <option value="surv_Rate"  >Survival Rate</option>
+        					<option value="surv_Count" >Survivor Count</option>
+                  <option value="pop_Count" selected = "selected">Population Count</option>
+
      						</select>
      					</div>
               <div class="col-md-12 col-sm-3 col-xs-3">
                 Bubble Measure
                 <br>
                 <select name="measure2_select" onchange="measure2 = this.value" >
-                  <option value="surv_Rate"  >Survival Rate</option>
+                  <option value="none" >---</option>
+                  <option value="surv_Rate"  selected = "selected">Survival Rate</option>
                   <option value="surv_Count" >Survivor Count</option>
                   <option value="pop_Count" >Population Count</option>
-                  <option value="none" >---</option>
                 </select>
                 <br>
               </div>
@@ -108,7 +109,8 @@
      						X Axis
                 <br>
       					<select name="x-axis" onchange = "x_Axis = this.value">
-        					<option value="Gender">Gender</option>
+                  <option value="Total Sample">---</option>
+        					<option value="Gender" selected="selected">Gender</option>
                   <option value="Class">Class</option>
         					<option value="Age Range">Age</option>
         					<option value="Fare Range">Fare</option>
@@ -259,6 +261,9 @@
                         x.addOrderRule(overall_Order);
                         x.addGroupOrderRule(overall_Order);
                       }
+                      if (x_Axis == "Total Sample" && grouping !== "None") {
+                        x.title = "Whole Sample by " + grouping;
+                      }
 
 
                       var y;
@@ -310,6 +315,7 @@
                           bars.aggregate = dimple.aggregateMethod.avg;
                         } else if (measure == "pop_Count") {
                           bars.aggregate = dimple.aggregateMethod.count;
+
                         }
                       }
 
