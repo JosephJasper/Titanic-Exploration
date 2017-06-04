@@ -26,7 +26,11 @@
       var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown"];
       
       /* Variables for the animation */
-      var scenarios = [{a:"b"},{a:"b"},{a:"b"},{a:"b"},{a:"b"},{a:"b"},{a:"b"}];
+      var initial_State = {};
+      /*scenario_template = {omeasure: "none", omeasure2: "none", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: "None", oport_Slice: ["None"], odescription_Text: ""};*/
+      var scenarios = [
+        {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""},
+        {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""}];
       var animation_Run = scenarios.length;
       var animation_Playing = false;
  		</script>
@@ -463,33 +467,32 @@
         } 
       }
       function variable_Rewrite(object) {
-        measure = object.measure;
-        measure2 = object.measure2;
-        x_Axis = object.x_Axis;
-        grouping = object.grouping;
-        class_Slice = object.class_Slice;
-        gender_Slice = object.gender_Slice;
-        mortality_Slice = object.mortality_Slice;
-        ageRange_Slice = object.ageRange_Slice;
-        fareRange_Slice = object.fareRange_Slice;
-        port_Slice = object.port_Slice;
-        description_Text = object.description_Text;
+        measure = object.omeasure;
+        measure2 = object.omeasure2;
+        x_Axis = object.ox_Axis;
+        grouping = object.ogrouping;
+        class_Slice = object.oclass_Slice;
+        gender_Slice = object.ogender_Slice;
+        mortality_Slice = object.omortality_Slice;
+        ageRange_Slice = object.oageRange_Slice;
+        fareRange_Slice = object.ofareRange_Slice;
+        port_Slice = object.oport_Slice;
+        description_Text = object.odescription_Text;
       }
 
       function run_animation() {
         /* Capture initial state, may be useful if I add a play button */
-        var initial_State = {};
-        initial_State.measure = measure;
-        initial_State.measure2 = measure2;
-        initial_State.x_Axis = x_Axis;
-        initial_State.grouping = grouping;
-        initial_State.class_Slice = class_Slice;
-        initial_State.gender_Slice = gender_Slice;
-        initial_State.mortality_Slice = mortality_Slice;
-        initial_State.ageRange_Slice = ageRange_Slice; 
-        initial_State.fareRange_Slice = fareRange_Slice;
-        initial_State.port_Slice = port_Slice;
-        initial_State.description_Text = description_Text;
+        initial_State.omeasure = measure;
+        initial_State.omeasure2 = measure2;
+        initial_State.ox_Axis = x_Axis;
+        initial_State.ogrouping = grouping;
+        initial_State.oclass_Slice = class_Slice;
+        initial_State.ogender_Slice = gender_Slice;
+        initial_State.omortality_Slice = mortality_Slice;
+        initial_State.oageRange_Slice = ageRange_Slice; 
+        initial_State.ofareRange_Slice = fareRange_Slice;
+        initial_State.oport_Slice = port_Slice;
+        initial_State.odescription_Text = description_Text;
 
         /* Hide controls and Data Dictionary during animation */
         d3.select('#form_change')
