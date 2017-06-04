@@ -338,7 +338,7 @@
                       }
 
                       myChart.draw();
-                      d3.select('#variable_Description')
+                      d3.select('#chart_Description')
                         .text(description_Text);
 
                     }
@@ -356,7 +356,7 @@
                 chart_graph();
 
   						</script>
-              <span id="variable_Description"></span>
+              <span id="chart_Description"></span>
 					</div>
  				</div>
  				<div class="col-md-2" id="end_margin">
@@ -476,7 +476,7 @@
         description_Text = object.description_Text;
       }
 
-      function animate() {
+      function run_animation() {
         /* Capture initial state, may be useful if I add a play button */
         var initial_State = {};
         initial_State.measure = measure;
