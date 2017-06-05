@@ -14,18 +14,17 @@ var fare_Range_Order = ["0 < 30","30 < 60","60 < 90","90 < 120","120 < 150","150
 var age_Range_Order = ["0 < 10","10 < 20","20 < 30","30 < 40","40 < 50","50 < 60","60 < 70","70 < 80","80 < 90","Unknown"];
 var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown", "Perished", "Survived"];
 
-var test;
-
 /* Variables for the animation */
 var initial_State = {};
 /*scenario_template = {omeasure: "none", omeasure2: "none", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: "None", oport_Slice: ["None"], odescription_Text: ""};*/
 var scenarios = [
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""},
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""}];
+  {omeasure: "pop_Count", omeasure2: "none", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""}];
 var animation_Run = scenarios.length;
 var animation_Playing = false;
+var animate_Idx = 0;
 
-function chart_graph() {
+function chart_Graph() {
   d3.select("svg")
     .selectAll("*")
     .remove();
@@ -153,7 +152,6 @@ function chart_graph() {
       if (measure == "pop_Count") {
         if (grouping == "None") {
           bars.getTooltipText = function (e) {
-            test = e;
             return [
             x_Axis + ":  " + e.x,
             "Passengers:  " + e.y
@@ -161,7 +159,6 @@ function chart_graph() {
           }
         } else {
           bars.getTooltipText = function (e) {
-            test = e;
             return [
             grouping + ":  " + e.aggField[0],
             x_Axis + ":  " + e.x,
@@ -174,7 +171,6 @@ function chart_graph() {
       if (measure !== "pop_Count" && measure2 == "pop_Count") {
         if (grouping == "None") {
           bubbles.getTooltipText = function (e) {
-            test = e;
             return [
             x_Axis + ":  " + e.x,
             "Passengers:  " + e.y
@@ -182,7 +178,6 @@ function chart_graph() {
           }
         } else {
           bubbles.getTooltipText = function (e) {
-            test = e;
             return [
             grouping + ":  " + e.aggField[0],
             x_Axis + ":  " + e.x,
@@ -196,7 +191,6 @@ function chart_graph() {
       /* Evaluate need for a legend */
       if (x_Axis !== grouping && grouping !== "None"){
         legend = myChart.addLegend(65, 380, 510, 20, "left");
-        legend.text = "Test";
       }
 
       myChart.draw();
@@ -249,9 +243,10 @@ function variable_Rewrite(object) {
   fareRange_Slice = object.ofareRange_Slice;
   port_Slice = object.oport_Slice;
   description_Text = object.odescription_Text;
+  chart_Graph();
 }
 
-function run_animation() {
+function run_Animation() {
   /* Capture initial state, may be useful if I add a play button */
   initial_State.omeasure = measure;
   initial_State.omeasure2 = measure2;
@@ -272,17 +267,32 @@ function run_animation() {
   d3.select('#variable_Description')
     .style('display','none');
 
+  var animate_Interval = setInterval(function() {
+    if (animate_Idx < animation_Run) {
+      d3.select("#intro_text")
+        .style('display','none')
+        
+      variable_Rewrite(scenarios[animate_Idx]);
+    }
+
+    animate_Idx++;
+
+    if(animate_Idx >= animation_Run + 1) {
+        clearInterval(animate_Interval);
+
+        /* Reset variables and expose controls and Data Dictionary after animation */
+        variable_Rewrite(initial_State);
+        d3.select('#form_change')
+          .style('display','inherit');
+
+        d3.select('#variable_Description')
+          .style('display','inherit');        
+
+        }}, 5000);
 
 
 
 
 
 
-  /* Reset variables and expose controls and Data Dictionary after animation */
-  variable_Rewrite(initial_State);
-  d3.select('#form_change')
-    .style('display','inherit');
-
-  d3.select('#variable_Description')
-    .style('display','inherit');
 }

@@ -41,8 +41,10 @@
  		<div class="container">
  			<div class="row title-banner">
  				<div class="col-md-6 col-sm-6 col-xs-6">
- 					<img class="title-logo" src="./img/Titanic-96.png">
-          <!--Found at https://icons8.com/icon/42114/titanic-->
+          <a href="https://icons8.com/icon/42114/titanic">
+ 					  <img class="title-logo" src="./img/Titanic-96.png">
+            <!--Found at https://icons8.com/icon/42114/titanic-->
+          </a>
  				</div>
  				<div class="col-md-6 col-sm-6 col-xs-6 title-text text-right">
  					<h1>Joseph Jasper</h1>
@@ -58,7 +60,7 @@
  				<div class="col-md-2" id="buttons">
  					<span id="buttons_text" style="display: none;"></span>
  					<br>
- 					<form align="center" name="measures" id="form_change">
+ 					<form align="center" name="measures" id="form_change" style="display: none;">
               <!-- Maybe look at changing to bootstrap dropdowns.  http://getbootstrap.com/components/#dropdowns -->
    					<div class="row">
               <h4>Chart Controls</h4>
@@ -193,21 +195,27 @@
  				</div>
  				<div class="col-md-8" id="chart">
  					<span id="chart_text" style="display: none;"></span>
+          <span id="intro_text">
+            <h4>
+              Welcome to the results of my exploration of the Titanic Passenger data.
+            </h4>
+            <p>
+              This data set is a sample of all passengers of the titanic that was meant to help train a machine learning algorithm to predict likelyhood of survival across the full passenger data set.
+            </p>
+            <p>
+              This project is meant to display visualizations that compare the various features and how they may have impacted survival.
+            </p> 
+          </span>
  					<div class="col-md-12" id="chartContainer">
- 						<script src="http://d3js.org/d3.v4.min.js"></script>
- 						<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
-  						<script type="text/javascript">
-                var svg = dimple.newSvg("#chartContainer", 590, 450);
-
-                chart_graph();
-
-  						</script>
-              <span id="chart_Description"></span>
+						<script type="text/javascript">
+              var svg = dimple.newSvg("#chartContainer", 590, 450);
+						</script>
+            <span id="chart_Description"></span>
 					</div>
  				</div>
  				<div class="col-md-2" id="end_margin">
  					<span id="end_margin_text" style="display: none;"></span>
-          <div class="row" id="variable_Description"  align="center">
+          <div class="row" id="variable_Description"  align="center" style="display: none;">
             <h4 style="color:#00ade6; text-align:center;"><a style="color:#00ade6;" href="https://www.kaggle.com/c/titanic/data">Data Dictionary</a></h4>
             <div>
               Data is a random subset of 891 of the 2224 passengers of the Titanic.
@@ -284,8 +292,9 @@
       /* Listener for form to redraw the chart when user changes is selections */
       document.getElementById("form_change").addEventListener("change",
         function(event) {
-            chart_graph();
+            chart_Graph();
         }, false);
+      run_Animation();
 
 
  		</script>
