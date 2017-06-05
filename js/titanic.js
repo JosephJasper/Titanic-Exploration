@@ -13,16 +13,21 @@ var description_Text = "";
 var fare_Range_Order = ["0 < 30","30 < 60","60 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540"];
 var age_Range_Order = ["0 < 10","10 < 20","20 < 30","30 < 40","40 < 50","50 < 60","60 < 70","70 < 80","80 < 90","Unknown"];
 var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown", "Perished", "Survived"];
+var link = "https://www.google.com";
+var link_Text = "test";
 
 /* Variables for the animation */
 var initial_State = {};
-/*scenario_template = {omeasure: "none", omeasure2: "none", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: "None", oport_Slice: ["None"], odescription_Text: ""};*/
+/*scenario_template = {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""};*/
 var scenarios = [
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""},
-  {omeasure: "pop_Count", omeasure2: "none", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""}];
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We can see that across the entire population we have 891 passengers with a 38% survival rate.  Rather bleak overall, but let's find if digging deeper grants more context.", olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We see here that females had a much higher survival rate, despite making up about 1/3 of the sample.", olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We also see here that age likely played a factor.  Aside from the age ranges that are very sparsely populated (from 70 to 80 and 80 to 90), we see that passengers confirmed to be 10 or younger had a 15% to 30% better survival rate than other age ranges.", olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "This visualization implies that there was truth to the phrase 'women and children first' holds some truth.  It was interesting to read wikipedia's article and find a specific reference to the Titanic.", olink: "https://en.wikipedia.org/wiki/Women_and_children_first", olink_Text: "Women and Children First"}
+];
 var animation_Run = scenarios.length;
 var animation_Playing = false;
-var animate_Idx = 0;
+var animate_Idx = -1;
 
 function chart_Graph() {
   d3.select("svg")
@@ -197,6 +202,13 @@ function chart_Graph() {
       d3.select('#chart_Description')
         .text(description_Text);
 
+      d3.select('#chart_Description')
+        .append("p")
+        .append("a")
+        .attr("href",link)
+        .attr("target","_blank")
+        .text(link_Text);
+
     }
   );
 
@@ -243,6 +255,8 @@ function variable_Rewrite(object) {
   fareRange_Slice = object.ofareRange_Slice;
   port_Slice = object.oport_Slice;
   description_Text = object.odescription_Text;
+  link = object.olink;
+  link_Text = object.olink_Text;
   chart_Graph();
 }
 
@@ -259,6 +273,8 @@ function run_Animation() {
   initial_State.ofareRange_Slice = fareRange_Slice;
   initial_State.oport_Slice = port_Slice;
   initial_State.odescription_Text = description_Text;
+  initial_State.olink = link;
+  initial_State.olink_Text = link_Text;
 
   /* Hide controls and Data Dictionary during animation */
   d3.select('#form_change')
@@ -268,10 +284,10 @@ function run_Animation() {
     .style('display','none');
 
   var animate_Interval = setInterval(function() {
-    if (animate_Idx < animation_Run) {
+    if (animate_Idx > -1 && animate_Idx < animation_Run) {
       d3.select("#intro_text")
         .style('display','none')
-        
+
       variable_Rewrite(scenarios[animate_Idx]);
     }
 
@@ -288,7 +304,7 @@ function run_Animation() {
         d3.select('#variable_Description')
           .style('display','inherit');        
 
-        }}, 5000);
+        }}, 10000);
 
 
 
