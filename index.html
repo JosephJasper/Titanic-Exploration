@@ -35,6 +35,10 @@
       td {
         padding: 5px 5px 5px 5px;
       }
+      #chart_Description {
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+      }
  		</style>
  	</head>
  	<body>
@@ -80,8 +84,8 @@
                 <br>
                 <select name="measure2_select" onchange="measure2 = this.value" >
                   <option value="none" >---</option>
-                  <option value="surv_Rate"  selected = "selected">Survival Rate</option>
-                  <option value="surv_Count" >Survivor Count</option>
+                  <option value="surv_Rate"  >Survival Rate</option>
+                  <option value="surv_Count" selected = "selected">Survivor Count</option>
                   <option value="pop_Count" >Population Count</option>
                 </select>
                 <br>
@@ -195,6 +199,7 @@
  				</div>
  				<div class="col-md-8" id="chart">
  					<span id="chart_text" style="display: none;"></span>
+          <h6><span id="filter_Text" style="color: black;"></span></h6>
           <span id="intro_text">
             <br>
             <br>
@@ -214,9 +219,9 @@
           </span>
  					<div class="col-md-12" id="chartContainer">
 						<script type="text/javascript">
-              var svg = dimple.newSvg("#chartContainer", 590, 450);
+              var svg = dimple.newSvg("#chartContainer", 590, 410);
 						</script>
-            <h3>
+            <h3 style="margin: 0px 0px 0px 0px;">
               <span id="chart_Description"></span>
             </h3>
             <br>

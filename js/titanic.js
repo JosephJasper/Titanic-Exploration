@@ -1,6 +1,6 @@
 /* Define initial state of variables for chart function */
 var measure = "pop_Count";
-var measure2 = "surv_Rate";
+var measure2 = "surv_Count";
 var x_Axis = "Gender";
 var grouping = "Class";
 var class_Slice = "None";
@@ -13,17 +13,51 @@ var description_Text = "";
 var fare_Range_Order = ["0 < 30","30 < 60","60 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540"];
 var age_Range_Order = ["0 < 10","10 < 20","20 < 30","30 < 40","40 < 50","50 < 60","60 < 70","70 < 80","80 < 90","Unknown"];
 var overall_Order = ["0 < 10","0 < 30","1","10 < 20","2","20 < 30","3","30 < 40","30 < 60","40 < 50","50 < 60","60 < 70","60 < 90","70 < 80","80 < 90","90 < 120","120 < 150","150 < 180","180 < 210","210 < 240","240 < 270", "510 < 540","Unknown", "Perished", "Survived"];
-var link = "https://www.google.com";
-var link_Text = "test";
+var link = "";
+var link_Text = "";
 
 /* Variables for the animation */
 var initial_State = {};
-/*scenario_template = {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: ""};*/
+/*scenario_template = {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "", olink: "", olink_Text: ""};*/
 var scenarios = [
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We can see that across the entire population we have 891 passengers with a 38% survival rate.  Rather bleak overall, but let's find if digging deeper grants more context.", olink: "", olink_Text: ""},
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We see here that females had a much higher survival rate, despite making up about 1/3 of the sample.", olink: "", olink_Text: ""},
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "We also see here that age likely played a factor.  Aside from the age ranges that are very sparsely populated (from 70 to 80 and 80 to 90), we see that passengers confirmed to be 10 or younger had a 15% to 30% better survival rate than other age ranges.", olink: "", olink_Text: ""},
-  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "This visualization implies that there was truth to the phrase 'women and children first' holds some truth.  It was interesting to read wikipedia's article and find a specific reference to the Titanic.", olink: "https://en.wikipedia.org/wiki/Women_and_children_first", olink_Text: "Women and Children First"}
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "We can see that across the entire population we have 891 passengers with a 38% survival rate.  Rather bleak overall, but let's find if digging deeper grants more context.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None",
+   odescription_Text: "We see here that females had a much higher survival rate, despite making up about 1/3 of the sample.", olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "We also see here that age had an impact on survival.  Aside from the age ranges that are very sparsely populated (from 70 to 80 and 80 to 90), we see that passengers confirmed to be 10 or younger had a 15% to 30% better survival rate than other age ranges.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "Evaluating both factors at the same time seems to be the next logical step.  The result implies that there was truth to the phrase 'women and children first'.  It was interesting to read wikipedia's article and find a specific reference to the Titanic.", 
+  olink: "https://en.wikipedia.org/wiki/Women_and_children_first", olink_Text: "Women and Children First"},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Class", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "However, it appears that class is also a useful indicator for survival.  First class passengers having a 63% survival rate and trending downward across classes.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "1", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "Comparing survival by age and gender, filtering for first class passengers; we can see that the survival rate for females was above 90% with exception to one child under 10 who did not survive.  Additionally, most of the groupings of males had above a 24% survival rate.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "2", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "For second class passengers, we can see that survival rate of females is similar to first class with all ages above 80%.  For males: children under 10 had a 100% survival, but all other age groupings except 1 had a survival rate below 24%.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "3", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], 
+  oport_Slice: "None", odescription_Text: "We can see a large dip in the survival rate across all age ranges and genders for third class passengers.  Children under 10 drops to 52% for females and 38% for males.  For all other age ranges, female survival rate dropped to 50% and 12% for males", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "For the purposes of informing a machine learning model or as a statistical view of the survival rate of Titanic passengers, gender, class and age appear to be key features.  However, it is important to realize that this view of the data is not the complete data set nor is it the complete story.", 
+  olink: "", olink_Text: ""},
+  {omeasure: "pop_Count", omeasure2: "surv_Count", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
+  odescription_Text: "When you look at survival as a count of survivors as opposed to a rate, you can see that the survivor count is almost consistent across the classes by gender.  You can also see that the third class passengers make up more than half of the sample.  It is definitely fair to suggest that class impacted likely hood of survival, but is difficult to say there was preferential treatment while evacuating without deeper study into the incident.",
+   olink: "", olink_Text: ""}
 ];
 var animation_Run = scenarios.length;
 var animation_Playing = false;
@@ -191,6 +225,37 @@ function chart_Graph() {
           }
         }
       }
+      var filter_List ='';
+
+      if (class_Slice != "None" || gender_Slice != "None" || mortality_Slice != "None" || 
+        ageRange_Slice.length != 1 || ageRange_Slice[0] != "None" || 
+        fareRange_Slice.length != 1 || fareRange_Slice[0] != "None" || 
+        port_Slice != "None"){
+        filter_List = 'Filtered for: '
+        if (class_Slice != "None") {
+          filter_List = filter_List + 'Class = ' + class_Slice + '/ ';
+        }
+        if (gender_Slice != "None") {
+          filter_List = filter_List + 'Gender = ' + gender_Slice + '/ ';
+        }
+        if (mortality_Slice != "None") {
+          filter_List = filter_List + 'Mortality = ' + mortality_Slice + '/ ';
+        }
+        if (ageRange_Slice.length != 1 || ageRange_Slice[0] != "None") {
+          filter_List = filter_List + 'Age = ' + ageRange_Slice + '/ ';
+        }
+        if (fareRange_Slice.length != 1 || fareRange_Slice[0] != "None") {
+          filter_List = filter_List + 'Fare = ' + fareRange_Slice + '/ ';
+        }
+        if (port_Slice != "None") {
+          filter_List = filter_List + 'Port = ' + port_Slice + '/ ';
+        }
+      }
+      if (filter_List != ''){
+        filter_List = filter_List.substring(0, filter_List.length -2);
+      }
+      d3.select('#filter_Text')
+        .text(filter_List);
 
 
       /* Evaluate need for a legend */
@@ -208,18 +273,16 @@ function chart_Graph() {
         .attr("href",link)
         .attr("target","_blank")
         .text(link_Text);
-
     }
   );
 
   /* Allow graph to change size and preserve aspect ratio depending on resizing */
   d3.select('svg')
     .attr('preserveAspectRatio','xMinYMin meet')
-    .attr('viewBox', '0 0 590 450')
+    .attr('viewBox', '0 0 590 410')
     .classed('svg-content-responsive', true)
     .attr('height', null)
     .attr('width', null);
-  
 }
 
 /* Function to collect all options selected from the Fare Range slicer */
