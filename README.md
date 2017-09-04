@@ -14,7 +14,9 @@ I do wish I had more capability/time to give the form a more professional appear
 
 ####Feedback####
 
-Coming soon
+"The sizing of the text on the base page is too small and not comparable to the other 'slides'"
+
+"The speed of the animation isn't always long enough and sometimes is too long"
 
 ####Resources####
 
