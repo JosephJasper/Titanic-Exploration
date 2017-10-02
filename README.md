@@ -12,11 +12,22 @@ I chose a three panel layout to make it easy to view the control panel, visualiz
 The color of the background and the text has a slightly nautical theme, which I felt to be suitable.
 I do wish I had more capability/time to give the form a more professional appearance.
 
+-Post feedback
+In adding the animation buttons, I realized that the placement was important.  At first all buttons were in the same table on the left; but as you navigated through the presentation, the buttons changing location could cause you to navigate the wrong way.  Putting the forward moving buttons, and the backward buttons on opposite sides seemed more mobile friendly and seemed to adjust for this.
+
+The blue/red issue relating male and female seemed odd but valid.  I had noticed it in my first draft, but chose to ignore it since I felt it was a non-issue.  It is somewhat encoded into our society and very wide spread, my new solution was to change the color order so that I am not perpetuating or creating a distraction from the data itself.
+
 ####Feedback####
 
 "The sizing of the text on the base page is too small and not comparable to the other 'slides'"
 
-"The speed of the animation isn't always long enough and sometimes is too long"
+"The speed of the transitions isn't always long enough and sometimes is too long"
+
+"Having the 'slides' timed isn't helpful when you are using a mobile screen where you have to scroll around a lot"
+
+"The options bunch up on a really small screen"
+
+"People may accidentally misinterpret the data for gender because blue comes up for female and red/pink comes up for male.  Seems silly, but it could cause confusion"
 
 ####Resources####
 

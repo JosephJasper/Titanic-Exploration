@@ -17,7 +17,9 @@ var link = "";
 var link_Text = "";
 
 /* Variables for the animation */
-var initial_State = {};
+var initial_State = {
+  omeasure: "pop_Count", omeasure2: "surv_Count", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
+  oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "", olink: "", olink_Text: ""};
 /*scenario_template = {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "", olink: "", olink_Text: ""};*/
 var scenarios = [
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Total Sample", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
@@ -26,18 +28,18 @@ var scenarios = [
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None",
-   odescription_Text: "We see here that females had a much higher survival rate, despite making up about 1/3 of the sample.", olink: "", olink_Text: ""},
+   odescription_Text: "When grouping by gender, females had a much higher survival rate, despite making up about 1/3 of the sample.", olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
-  odescription_Text: "We also see here that age had an impact on survival.  Aside from the age ranges that are very sparsely populated (from 70 to 80 and 80 to 90), we see that passengers confirmed to be 10 or younger had a 15% to 30% better survival rate than other age ranges.", 
+  odescription_Text: "When changing the grouping to age range, it appears that age may have had an impact on survival.  Aside from the age ranges that are sparsely populated (from 70 to 80 and 80 to 90), we see that passengers confirmed to be younger than 10 had a 15% to 30% better survival rate than other age ranges.", 
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
-  odescription_Text: "Evaluating both factors at the same time seems to be the next logical step.  The result implies that there was truth to the phrase 'women and children first'.  It was interesting to read wikipedia's article and find a specific reference to the Titanic.", 
+  odescription_Text: "My next step was to group each age range by gender.  The result implies that there was truth to the phrase 'women and children first'.  Women having a high survival rate across age ranges, execpt under the age of 10 where men had a comprable survival rate.  It was interesting to read wikipedia's article and find a specific reference to the Titanic.", 
   olink: "https://en.wikipedia.org/wiki/Women_and_children_first", olink_Text: "Women and Children First"},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Class", ogrouping: "None", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
-  odescription_Text: "However, it appears that class is also a useful indicator for survival.  First class passengers having a 63% survival rate and trending downward across classes.", 
+  odescription_Text: "I evaluated many of the other factors with mixed result, however class seemed to be another factor that is tied to survival.  First class passengers with a 63% survival rate and trending downward across classes.  My next step was to evaluate the data with all three of these factors", 
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "1", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
@@ -45,18 +47,18 @@ var scenarios = [
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "2", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
-  odescription_Text: "For second class passengers, we can see that survival rate of females is similar to first class with all ages above 80%.  For males: children under 10 had a 100% survival, but all other age groupings except 1 had a survival rate below 24%.", 
+  odescription_Text: "For female second class passengers, we can see that survival rate is similar to first class with all ages above 80% survival.  For males, children under 10 had 100% survival, but all other age groupings except 1 had a survival rate below 24%.", 
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Age Range", ogrouping: "Gender", oclass_Slice: "3", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], 
-  oport_Slice: "None", odescription_Text: "We can see a large dip in the survival rate across all age ranges and genders for third class passengers.  Children under 10 drops to 52% for females and 38% for males.  For all other age ranges, female survival rate dropped to 50% and 12% for males", 
+  oport_Slice: "None", odescription_Text: "We can see a large dip in the survival rate across all age ranges and genders for third class passengers.  Children under 10 drops to 52% for females and 38% for males.  For all other age ranges, female survival rate dropped to 50% and 12% for males (I would classify the lone 60 to 70 year old woman as an outlier).", 
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Rate", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", odescription_Text: "For the purposes of informing a machine learning model or as a statistical view of the survival rate of Titanic passengers, gender, class and age appear to be key features.  However, it is important to realize that this view of the data is not the complete data set nor is it the complete story.", 
   olink: "", olink_Text: ""},
   {omeasure: "pop_Count", omeasure2: "surv_Count", ox_Axis: "Gender", ogrouping: "Class", oclass_Slice: "None", ogender_Slice: "None", omortality_Slice: "None", 
   oageRange_Slice: ["None"], ofareRange_Slice: ["None"], oport_Slice: "None", 
-  odescription_Text: "When you look at survival as a count of survivors as opposed to a rate, you can see that the survivor count is almost consistent across the classes by gender.  You can also see that the third class passengers make up more than half of the sample.  It is definitely fair to suggest that class impacted likely hood of survival, but is difficult to say there was preferential treatment while evacuating without deeper study into the incident.",
+  odescription_Text: "When you look at survival as a count of survivors as opposed to a rate, you can see that the survivor count is comparable across the classes by gender.  You can also see that the third class passengers make up more than half of the sample.  It is definitely fair to suggest that class impacted likely hood of survival, but is difficult to say to what level preferential treatment existed while evacuating without deeper study into witness accounts and other factors like location of the classes of passengers in relation to life boats.",
    olink: "", olink_Text: ""}
 ];
 var animation_Run = scenarios.length;
@@ -75,8 +77,8 @@ function chart_Graph() {
         return (class_Slice == "None" || class_Slice == d['Class'])
         && (gender_Slice == "None" || gender_Slice == d['Gender'])
         && (mortality_Slice =="None" || mortality_Slice == d['Mortality'])
-        && ((ageRange_Slice[0] == "None" && ageRange_Slice.length == 1)|| ageRange_Slice.indexOf(d['Age Range']) !== -1)
-        && ((fareRange_Slice[0] == "None" && fareRange_Slice.length == 1)|| fareRange_Slice.indexOf(d['Fare Range']) !== -1)
+        && ((ageRange_Slice[0] == "None" && ageRange_Slice.length == 1)|| ageRange_Slice.length == 0 || ageRange_Slice.indexOf(d['Age Range']) !== -1)
+        && ((fareRange_Slice[0] == "None" && fareRange_Slice.length == 1)|| fareRange_Slice.length == 0 || fareRange_Slice.indexOf(d['Fare Range']) !== -1)
         && (port_Slice == "None" || port_Slice == d['Port']);
       });
 
@@ -86,14 +88,15 @@ function chart_Graph() {
       /* Using default colors with black stroke to highlight bubbles over bars */
       myChart.defaultColors = [
         new dimple.color('#93BAD5','#000000',1),
+        new dimple.color('#C2E587','#000000',1),
         new dimple.color('#FC998E','#000000',1),
         new dimple.color('#FDC381','#000000',1),
-        new dimple.color('#C2E587','#000000',1),
         new dimple.color('#FFF18C','#000000',1),
         new dimple.color('#C999CA','#000000',1),
         new dimple.color('#A4DCD2','#000000',1),
         new dimple.color('#D6EFD1','#000000',1),
-        new dimple.color('#FFFFC2','#000000',1)
+        new dimple.color('#FFFFC2','#000000',1),
+        new dimple.color('#00ADE6','#000000',1)
       ];
 
       /* Create functionality in case user wants to compare 2 features or just view one */
@@ -228,8 +231,8 @@ function chart_Graph() {
       var filter_List ='';
 
       if (class_Slice != "None" || gender_Slice != "None" || mortality_Slice != "None" || 
-        ageRange_Slice.length != 1 || ageRange_Slice[0] != "None" || 
-        fareRange_Slice.length != 1 || fareRange_Slice[0] != "None" || 
+        (ageRange_Slice.length != 0 && (ageRange_Slice.length != 1 || ageRange_Slice[0] != "None")) || 
+        (fareRange_Slice.length != 0 && (fareRange_Slice.length != 1 || fareRange_Slice[0] != "None")) || 
         port_Slice != "None"){
         filter_List = 'Filtered for: '
         if (class_Slice != "None") {
@@ -241,10 +244,10 @@ function chart_Graph() {
         if (mortality_Slice != "None") {
           filter_List = filter_List + 'Mortality = ' + mortality_Slice + '/ ';
         }
-        if (ageRange_Slice.length != 1 || ageRange_Slice[0] != "None") {
+        if (ageRange_Slice.length != 0 && (ageRange_Slice.length != 1 || ageRange_Slice[0] != "None")) {
           filter_List = filter_List + 'Age = ' + ageRange_Slice + '/ ';
         }
-        if (fareRange_Slice.length != 1 || fareRange_Slice[0] != "None") {
+        if (fareRange_Slice.length != 0 && (fareRange_Slice.length != 1 || fareRange_Slice[0] != "None")) {
           filter_List = filter_List + 'Fare = ' + fareRange_Slice + '/ ';
         }
         if (port_Slice != "None") {
@@ -252,6 +255,7 @@ function chart_Graph() {
         }
       }
       if (filter_List != ''){
+        filter_List = filter_List.replace("None,","");
         filter_List = filter_List.substring(0, filter_List.length -2);
       }
       d3.select('#filter_Text')
@@ -368,10 +372,79 @@ function run_Animation() {
           .style('display','inherit');        
 
         }}, 10000);
+}
 
+function progress_Animation(direction) {
+  if(animate_Idx == animation_Run){
+    initial_State.omeasure = measure;
+    initial_State.omeasure2 = measure2;
+    initial_State.ox_Axis = x_Axis;
+    initial_State.ogrouping = grouping;
+    initial_State.oclass_Slice = class_Slice;
+    initial_State.ogender_Slice = gender_Slice;
+    initial_State.omortality_Slice = mortality_Slice;
+    initial_State.oageRange_Slice = ageRange_Slice; 
+    initial_State.ofareRange_Slice = fareRange_Slice;
+    initial_State.oport_Slice = port_Slice;
+    initial_State.odescription_Text = description_Text;
+    initial_State.olink = link;
+    initial_State.olink_Text = link_Text;
+  } 
 
+  if(direction == 'forward'){
+    animate_Idx++;
+  } else if (direction == 'back'){
+    animate_Idx--;
+  } else if (direction == 'stop'){
+    animate_Idx = animation_Run;
+  } else if (direction == 'restart'){
+    animate_Idx = -1;
+  }
 
+  /* Change visible items depending on whether animation is running */
+  if(animate_Idx > -1){
+    d3.select('#back_Button')
+      .style('display','inline');  
+    d3.select('#chartContainer')
+      .style('display','inherit');
+    d3.select("#intro_text")
+      .style('display','none');
+  } else {
+    d3.select('#back_Button')
+      .style('display','none');
+    d3.select('#chartContainer')
+      .style('display','none');
+    d3.select("#intro_text")
+      .style('display','inherit');
+  }
 
+  if(animate_Idx < animation_Run){
+    d3.select('#forward_Button')
+      .style('display','inline');
+    d3.select('#stop_Button')
+      .style('display','inline');
+    d3.select('#restart_Button')
+      .style('display','none');
+    d3.select('#form_change')
+    .style('display','none');
+    d3.select('#variable_Description')
+    .style('display','none');
+  } else {
+    d3.select('#forward_Button')
+      .style('display','none');
+    d3.select('#stop_Button')
+      .style('display','none');
+    d3.select('#restart_Button')
+      .style('display','inline');
+    d3.select('#form_change')
+      .style('display','inherit');
+    d3.select('#variable_Description')
+      .style('display','inherit');
+  }
 
-
+  if (animate_Idx > -1 && animate_Idx < animation_Run) {
+    variable_Rewrite(scenarios[animate_Idx]);
+  } else {
+    variable_Rewrite(initial_State);
+  }
 }

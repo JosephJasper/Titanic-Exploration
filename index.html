@@ -39,10 +39,13 @@
         padding: 0px 0px 0px 0px;
         margin: 0px 0px 0px 0px;
       }
+      #animation_Controls {
+        text-align: center;
+      }
  		</style>
  	</head>
  	<body>
- 		<div class="container">
+ 		<div class="container" style="min-width: 600px;">
  			<div class="row title-banner">
  				<div class="col-md-6 col-sm-6 col-xs-6">
           <a href="https://icons8.com/icon/42114/titanic">
@@ -60,6 +63,26 @@
  			<div class="row" id="main-body">
         <div class="row">
           <h3 style="color:#00ade6; text-align:center;">Titanic Passenger Data Exploration</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-3 col-sm-4 col-xs-4 animation_Controls">
+            <table id="back_Buttons" syle="display: inline;">
+              <tr syle="display: inline;">
+                <td id="restart_Button" style="display: none;"><button style="color: #ffffff; background: #00ade6; border-color: #ffffff;" onclick="progress_Animation('restart');">Restart</button></td>
+                <td id="back_Button" style="display: none;"><button style="color: #ffffff; background: #00ade6; border-color: #ffffff;" onclick="progress_Animation('back');">Back</button></td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-6 col-sm-4 col-xs-4 animation_Controls">
+          </div>
+          <div class="col-md-3 col-sm-4 col-xs-4 animation_Controls">
+            <table id="forward_Buttons" syle="display: inline;" align="right">
+              <tr syle="display: inline;">
+                <td id="forward_Button" style="display: inline;"><button style="color: #ffffff; background: #00ade6; border-color: #ffffff;" onclick="progress_Animation('forward');">Forward</button></td>
+                <td id="stop_Button" style="display: inline;"><button style="color: #ffffff; background: #00ade6; border-color: #ffffff;" onclick="progress_Animation('stop');">Explore</button></td>
+              </tr>
+            </table>
+          </div>
         </div>
  				<div class="col-md-2" id="buttons">
  					<span id="buttons_text" style="display: none;"></span>
@@ -204,24 +227,34 @@
             <br>
             <br>
             <br>
-            <h4>
-              Welcome to the results of my exploration of the Titanic Passenger data.
-            </h4>
-            <p>
-              This data set is a sample of all passengers of the RMS Titanic that was meant to help train a machine learning algorithm to predict likelyhood of survival across the full passenger data set.
-            </p>
-            <p>
-              This project is meant to display visualizations that compare the various features and how they may have impacted survival.
-            </p> 
-            <p>
-              After my presentation, you will be given the opportunity to play with the settings and filters yourself and draw your own conclusions.
-            </p>
+            <h3>
+              <p>
+                Welcome to the results of my exploration of the Titanic Passenger data.
+              </p>
+              <p>
+                This data set is a sample of all passengers of the RMS Titanic and was separated to help train a machine learning algorithm to predict likelyhood of survival across the full passenger data set.
+              </p>
+              <p>
+                This project is meant to display visualizations that compare the various features and how they may have impacted survival.
+              </p> 
+              <p>
+                After my presentation, you will be given the opportunity to change the visualization and filters yourself so that you can explore or draw your own conclusions.
+              </p>
+              <br>
+              <p>
+                The blue buttons toward the top are meant for you to navigate forward and back through my presentation at your own pace or to skip to the end where you can explore the data yourself.
+              </p>
+              <br>
+              <br>
+              <br>
+              <br>
+            </h3>
           </span>
- 					<div class="col-md-12" id="chartContainer">
+ 					<div class="col-md-12" id="chartContainer" style="display: none;">
 						<script type="text/javascript">
               var svg = dimple.newSvg("#chartContainer", 590, 410);
 						</script>
-            <h3 style="margin: 0px 0px 0px 0px;">
+            <h3>
               <span id="chart_Description"></span>
             </h3>
             <br>
@@ -308,9 +341,7 @@
         function(event) {
             chart_Graph();
         }, false);
-      run_Animation();
-
-
+      /*run_Animation();*/
  		</script>
  	</body>
  </html>
